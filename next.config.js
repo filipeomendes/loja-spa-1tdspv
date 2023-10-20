@@ -10,6 +10,12 @@ module.exports = {
           port: '',
           pathname: '/img/**',
         },
+        {
+          protocol: 'https',
+          hostname: 'www.paodeacucar.com',
+          port: '',
+          pathname: '/img/**',
+        },
       ],
     },
   }
