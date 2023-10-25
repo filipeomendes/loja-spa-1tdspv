@@ -1,8 +1,36 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+
+
+
+
 @layer components {
+
+    .card-user{
+        @apply flex flex-wrap;
+
+        & li{
+            @apply p-5 m-5 bg-red-400 w-40;
+
+            & img{
+                @apply block m-auto;
+            }
+
+            & figcaption{
+                @apply text-center font-bold text-xl;
+            }
+        }
+    }
+
     .menu{
 
         & li{
