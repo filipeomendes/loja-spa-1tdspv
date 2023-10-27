@@ -32,7 +32,7 @@ export default async function TodosLaticinios() {
                     <tr key={queijo.id}>
                         <td>{queijo.id}</td>
                         <td>
-                            <Link href={}></Link>
+                            <Link href={`/produtos/fazenda/loja/laticinios`}></Link>
                             <Image src={queijo.imagem} width={100} height={100} alt={queijo.descricao} /></td>
                         <td>{queijo.nome}</td>
                         <td>{queijo.preco}</td>
