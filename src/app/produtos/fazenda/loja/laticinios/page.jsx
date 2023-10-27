@@ -1,14 +1,15 @@
 import { redirect } from "next/dist/server/api-utils";
 import Image from "next/image";
+import Link from "next/link";
 
 export default async function TodosLaticinios() {
-        let queijo;
+        let queijos;
         try{
-            const respose = await fetch("http://localhost:3000/api/laticinios/");
-            queijo = await respose.json();
+            const respose = await fetch("http://localhost:3000/api/laticinios/0");
+            queijos = await respose.json();
         }catch(error){
-            console.log(error)
-            redirect("/error")
+            console.log(error);
+            redirect("/error");
         }
 
   return (
