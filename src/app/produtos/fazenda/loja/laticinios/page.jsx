@@ -5,8 +5,8 @@ import Link from "next/link";
 export default async function TodosLaticinios() {
         let queijos;
         try{
-            const respose = await fetch("http://localhost:3000/api/laticinios/0");
-            queijos = await respose.json();
+            const response = await fetch("http://localhost:3000/api/laticinios/0");
+            queijos = await response.json();
         }catch(error){
             console.log(error);
             redirect("/error");
@@ -33,8 +33,9 @@ export default async function TodosLaticinios() {
                     <tr key={queijo.id}>
                         <td>{queijo.id}</td>
                         <td>
-                            <Link href={`/produtos/fazenda/loja/laticinios/${queijo.id}`}></Link>
-                            <Image src={queijo.imagem} width={100} height={100} alt={queijo.descricao} /></td>
+                            <Link href={`/produtos/fazenda/loja/laticinios/${queijo.id}`}>
+                            <Image src={queijo.imagem} width={100} height={100} alt={queijo.descricao} /></Link>
+                        </td>
                         <td>{queijo.nome}</td>
                         <td>{queijo.preco}</td>
                         <td>{queijo.categoria}</td>
