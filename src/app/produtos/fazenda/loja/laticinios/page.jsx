@@ -1,10 +1,16 @@
+import { redirect } from "next/dist/server/api-utils";
 import Image from "next/image";
 
 export default async function TodosLaticinios() {
+        let queijo;
+        try{
+            const respose = await fetch("http://localhost:3000/api/laticinios/");
+            queijo = await respose.json();
+        }catch(error){
+            console.log(error)
+            redirect("/error")
+        }
 
-        const response = await fetch("http://localhost:3000/api/laticinios");
-        const queijos = await response.json();
-        
   return (
     <div>
 
@@ -25,7 +31,9 @@ export default async function TodosLaticinios() {
                 {queijos.map((queijo) => (
                     <tr key={queijo.id}>
                         <td>{queijo.id}</td>
-                        <td><Image src={queijo.imagem} width={100} height={100} alt={queijo.descricao} /></td>
+                        <td>
+                            <Link href={}></Link>
+                            <Image src={queijo.imagem} width={100} height={100} alt={queijo.descricao} /></td>
                         <td>{queijo.nome}</td>
                         <td>{queijo.preco}</td>
                         <td>{queijo.categoria}</td>
