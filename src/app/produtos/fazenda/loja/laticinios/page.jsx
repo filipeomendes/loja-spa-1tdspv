@@ -13,7 +13,7 @@ export default async function TodosLaticinios() {
         }
 
   return (
-    <div>
+    <div className="lat-prod-all">
 
         <h1>Laticínios</h1>
 
@@ -33,7 +33,7 @@ export default async function TodosLaticinios() {
                     <tr key={queijo.id}>
                         <td>{queijo.id}</td>
                         <td>
-                            <Link href={`/produtos/fazenda/loja/laticinios`}></Link>
+                            <Link href={`/produtos/fazenda/loja/laticinios/${queijo.id}`}></Link>
                             <Image src={queijo.imagem} width={100} height={100} alt={queijo.descricao} /></td>
                         <td>{queijo.nome}</td>
                         <td>{queijo.preco}</td>
