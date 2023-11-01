@@ -8,6 +8,9 @@ export default function Cabecalho (){
             <nav className="menu">
                 <ul>
                     <li>
+                        <Link href="/login">LOGIN</Link>
+                    </li>
+                    <li>
                         <Link href="/produtos/tenis">Tênis</Link>
                     </li>
                     <li>
