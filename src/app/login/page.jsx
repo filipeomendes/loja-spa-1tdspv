@@ -1,9 +1,14 @@
 "use client";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function Login() {
 
+    //Utilizando o redirecionamento quando estamos no cliente:
+    const router = useRouter();
+
     const [msgstatus, setMsgStatus] = useState("");
+    const [classLoginMsg, setClassLoginMsg] = useState("");
 
     //Criando um useState para comportar o usuário:
     const [usuario, setUsuario] = useState({
@@ -11,6 +16,16 @@ export default function Login() {
         "senha":""
     });
 
+    useEffect(() => {
+       if(msgstatus == "Login realizado com SUCESSO!"){
+          setClassLoginMsg("login-suc");
+        }else if(msgstatus == "USUÁRIO E OU SENHA INVÁLIDOS!"){
+            setClassLoginMsg("login-err");
+        }else{
+            setClassLoginMsg("login");
+        }
+    }, [msgstatus]);
+    
     //Função de preenchimento do FORM...
     const handleChange = (e)=>{
         //Destructuring
@@ -36,9 +51,20 @@ export default function Login() {
                 const status = await response.json();
 
                 if(status.status == true){
-                    setMsgStatus("Login realizado com sucesso!");
+                    setMsgStatus("Login realizado com SUCESSO!");
+                    setTimeout(()=>{
+                        setMsgStatus("");
+                        router.push("/");
+                    },5000);
                 }else{
-                    setMsgStatus("Usuário e ou senha inválidos!");
+                    setMsgStatus("USUÁRIO E OU SENHA INVÁLIDOS!");
+                    setTimeout(()=>{
+                        setMsgStatus("");
+                        setUsuario({
+                            "email":"",
+                            "senha":""
+                        });
+                    },5000);
                 }
             }
         } catch (error) {
@@ -48,7 +74,8 @@ export default function Login() {
   return (
     <div>
         <h1>INFORMAÇÕES DOS USUÁRIOS</h1>
-        <h2>{msgstatus}</h2>
+
+            <h2 className={classLoginMsg}>{msgstatus}</h2>
 
         <div>
             <form onSubmit={handleSubmit}>
@@ -64,6 +91,9 @@ export default function Login() {
                     </div>
                     <div>
                         <button>LOGIN</button>
+                    </div>
+                    <div>
+                        <p>Se você ainda não possui registro. CLIQUE AQUI</p>
                     </div>
                 </fieldset>
             </form>
