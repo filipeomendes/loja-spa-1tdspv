@@ -1,30 +1,28 @@
 "use client"
-
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-// export default async function UserPages() {
 export default function UserPages() {
 
     // const response = await fetch("http://localhost:3000/api/git-users");
-    // const users = await response.json()
+    // const users = await response.json();
 
     const [users, setUsers] = useState([]);
 
-        useEffect(()=>{
+        useEffect(() => {
             fetch("http://localhost:3000/api/git-users")
             .then((response)=> response.json())
             .then((response)=> setUsers(response))
             .catch(errors=> console.error(errors));
+
         }, [])
-
+        
         console.log(users);
-
 
   return (
     <div>
         <h1>User Pages</h1>
-
+        
         <div>
             <ul className="card-user">
                 {
@@ -43,6 +41,7 @@ export default function UserPages() {
                 }
             </ul>
         </div>
+
     </div>
   )
 }
