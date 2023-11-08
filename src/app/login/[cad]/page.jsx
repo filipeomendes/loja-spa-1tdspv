@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function LoginUser() {
+export default function CadUser({params}) {
 
     //Utilizando o redirecionamento quando estamos no cliente:
     const router = useRouter();
@@ -13,6 +13,7 @@ export default function LoginUser() {
 
     //Criando um useState para comportar o usuário:
     const [usuario, setUsuario] = useState({
+        "nome":"",
         "email":"",
         "senha":""
     });
@@ -63,7 +64,8 @@ export default function LoginUser() {
                         setMsgStatus("");
                         setUsuario({
                             "email":"",
-                            "senha":""
+                            "senha":"",
+                            "nome":""
                         });
                     },5000);
                 }
@@ -74,14 +76,19 @@ export default function LoginUser() {
 
   return (
     <div>
-        <h1>INFORMAÇÕES DOS USUÁRIOS</h1>
+        <h1>CADASTRO DE USUÁRIOS</h1>
 
             <h2 className={classLoginMsg}>{msgstatus}</h2>
 
         <div>
             <form onSubmit={handleSubmit}>
                 <fieldset>
-                    <legend>LOGIN</legend>
+
+                    <legend>CADASTRO</legend>
+                    <div>
+                        <label htmlFor="idNome">NOME:</label>
+                        <input type="text" name="nome" id="idNome" placeholder="Digite o seu NOME:" value={usuario.nome} onChange={handleChange}/>
+                    </div>
                     <div>
                         <label htmlFor="idEmail">EMAIL:</label>
                         <input type="email" name="email" id="idEmail" placeholder="Digite o seu EMAIL:" value={usuario.email} onChange={handleChange}/>
@@ -91,10 +98,10 @@ export default function LoginUser() {
                         <input type="password" name="senha" id="idSenha" placeholder="Digite a sua SENHA:" value={usuario.senha} onChange={handleChange}/>
                     </div>
                     <div>
-                        <button>LOGIN</button>
+                        <button>CADASTRAR</button>
                     </div>
                     <div>
-                        <p>Se você ainda não possui registro. <Link href="/login/cad">CLIQUE AQUI</Link></p>
+                        <p>Se você já possui registro. <Link href="/login">CLIQUE AQUI</Link></p>
                     </div>
                 </fieldset>
             </form>
