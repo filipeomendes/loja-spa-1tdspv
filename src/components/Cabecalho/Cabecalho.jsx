@@ -25,6 +25,9 @@ export default function Cabecalho (){
                     <li>
                         <Link href="/user-pages">GIT-USERS</Link>
                     </li>
+                    <li>
+                        <Link href="/user-origin">User Origin</Link>
+                    </li>
                 </ul>
             </nav>
         </header>
