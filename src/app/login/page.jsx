@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 export default function LoginUser() {
 
     //Utilizando o redirecionamento quando estamos no cliente:
-    const router = useRouter();
+    const navigate = useRouter();
 
     const [msgstatus, setMsgStatus] = useState("");
     const [classLoginMsg, setClassLoginMsg] = useState("");
@@ -39,7 +39,7 @@ export default function LoginUser() {
     //Função de validação e ENVIO dos dados.
     const handleSubmit = async (e)=>{
         e.preventDefault();
-        
+
         try {
             const response = await fetch("http://localhost:3000/api/base/base-users/0",{
                 method: "POST",
@@ -53,10 +53,18 @@ export default function LoginUser() {
                 const user = await response.json();
 
                 if(user){
+
+                    //Gerando o token do usuário:
+                    const token = Math.random().toString(36).substring(2) + Math.random().toString(36).substring(2);
+
+                    //Armazenar o token no sessionStorage:
+                    sessionStorage.setItem("token-user",token);
+
                     setMsgStatus("Login realizado com SUCESSO!");
+                    
                     setTimeout(()=>{
                         setMsgStatus("");
-                        router.push("/");
+                        navigate.push("/");
                     },5000);
                 }else{
                     setMsgStatus("USUÁRIO E OU SENHA INVÁLIDOS!");

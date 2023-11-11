@@ -13,15 +13,16 @@ export default function CadUser({params}) {
 
     //Criando um useState para comportar o usuário:
     const [usuario, setUsuario] = useState({
+        "info":"cadastro",
         "nome":"",
         "email":"",
         "senha":""
     });
 
     useEffect(() => {
-       if(msgstatus == "Login realizado com SUCESSO!"){
+       if(msgstatus == "Cadastro realizado com SUCESSO!"){
           setClassLoginMsg("login-suc");
-        }else if(msgstatus == "USUÁRIO E OU SENHA INVÁLIDOS!"){
+        }else if(msgstatus == "OCORREU UM ERRO!"){
             setClassLoginMsg("login-err");
         }else{
             setClassLoginMsg("login");
@@ -50,19 +51,20 @@ export default function CadUser({params}) {
             });
 
             if(response.ok){
-                const status = await response.json();
+                const user = await response.json();
 
-                if(status.status == true){
-                    setMsgStatus("Login realizado com SUCESSO!");
+                if(user){
+                    setMsgStatus("Cadastro realizado com SUCESSO!");
                     setTimeout(()=>{
                         setMsgStatus("");
                         router.push("/");
                     },5000);
                 }else{
-                    setMsgStatus("USUÁRIO E OU SENHA INVÁLIDOS!");
+                    setMsgStatus("OCORREU UM ERRO!");
                     setTimeout(()=>{
                         setMsgStatus("");
                         setUsuario({
+                            "info":"cadastro",
                             "email":"",
                             "senha":"",
                             "nome":""
